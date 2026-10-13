@@ -44,7 +44,7 @@
     "lint": "expo lint",
     "build:web": "expo export -p web",
     "predeploy": "npm run build:web",
-    "deploy": "gh-pages -d dist -t true"
+    "deploy": "gh-pages -d dist --dotfiles --nojekyll"
   },
   "private": true
 }
