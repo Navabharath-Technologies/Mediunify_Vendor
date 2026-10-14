@@ -9,7 +9,12 @@ if (fs.existsSync(distDir)) {
   fs.writeFileSync(nojekyllPath, '');
   console.log('✓ Created dist/.nojekyll');
 
-  // 2. Copy index.html to 404.html for SPA client-side routing fallback on GitHub Pages
+  // 2. Overwrite .gitignore in dist with an empty allow-all rule so git never ignores assets/node_modules/ (vector icons & fonts)
+  const gitignorePath = path.join(distDir, '.gitignore');
+  fs.writeFileSync(gitignorePath, '# Ensure all static export files are tracked on gh-pages\n!*\n');
+  console.log('✓ Created dist/.gitignore (ensures assets/node_modules icons are included)');
+
+  // 3. Copy index.html to 404.html for SPA client-side routing fallback on GitHub Pages
   const indexPath = path.join(distDir, 'index.html');
   const notFoundPath = path.join(distDir, '404.html');
   if (fs.existsSync(indexPath)) {
